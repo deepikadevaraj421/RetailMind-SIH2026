@@ -1,0 +1,53 @@
+{
+  "modelName": "Queue Congestion Regressor",
+  "algorithm": "XGBoost Regressor",
+  "version": "v1.0",
+  "dataset": "Queue_10min (RetailMind 1-Year Dataset)",
+  "trainSamples": 36789,
+  "valSamples": 7884,
+  "testSamples": 7884,
+  "target": "next_10min_queue",
+  "featureColumns": [
+    "queue_length",
+    "arrivals_10min",
+    "served_10min",
+    "active_counters",
+    "avg_wait_minutes",
+    "avg_service_minutes",
+    "footfall_index",
+    "hour",
+    "minute",
+    "day_of_week_num",
+    "is_weekend",
+    "queue_lag_1",
+    "queue_lag_2",
+    "queue_lag_3",
+    "rolling_queue_mean_3",
+    "rolling_arrival_mean_3",
+    "rolling_service_mean_3"
+  ],
+  "metrics": {
+    "mae": 0.7822,
+    "rmse": 1.2939,
+    "r2": 0.4092
+  },
+  "featureImportance": {
+    "queue_length": 0.40146657824516296,
+    "arrivals_10min": 0.01110200583934784,
+    "served_10min": 0.013454694300889969,
+    "active_counters": 0.06523998826742172,
+    "avg_wait_minutes": 0.15795186161994934,
+    "avg_service_minutes": 0.013100724667310715,
+    "footfall_index": 0.029629208147525787,
+    "hour": 0.011093351989984512,
+    "minute": 0.0118660693988204,
+    "day_of_week_num": 0.012611457146704197,
+    "is_weekend": 0.016578659415245056,
+    "queue_lag_1": 0.018814126029610634,
+    "queue_lag_2": 0.019541477784514427,
+    "queue_lag_3": 0.015046658925712109,
+    "rolling_queue_mean_3": 0.17421381175518036,
+    "rolling_arrival_mean_3": 0.013033523224294186,
+    "rolling_service_mean_3": 0.015255830250680447
+  }
+}

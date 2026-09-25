@@ -1,0 +1,41 @@
+{
+  "modelName": "Inventory Stock-out Risk Predictor",
+  "algorithm": "XGBoost Regressor",
+  "version": "v1.0",
+  "dataset": "Inventory_Shelf_Daily (RetailMind 1-Year Dataset)",
+  "trainSamples": 5110,
+  "valSamples": 1095,
+  "testSamples": 1095,
+  "target": "stockout_risk_0_to_1",
+  "featureColumns": [
+    "current_stock",
+    "expected_stock",
+    "stock_percentage",
+    "daily_units_sold_est",
+    "planogram_compliance_pct",
+    "misplacement_detected",
+    "demand_level_num",
+    "day_of_week",
+    "is_weekend",
+    "rolling_sales_3d",
+    "rolling_stock_3d"
+  ],
+  "metrics": {
+    "mae": 0.0295,
+    "rmse": 0.0405,
+    "r2": 0.9838
+  },
+  "featureImportance": {
+    "current_stock": 0.04787518456578255,
+    "expected_stock": 0.00785980373620987,
+    "stock_percentage": 0.2777548134326935,
+    "daily_units_sold_est": 0.09136307239532471,
+    "planogram_compliance_pct": 0.0,
+    "misplacement_detected": 0.0,
+    "demand_level_num": 0.563369631767273,
+    "day_of_week": 0.0,
+    "is_weekend": 0.0,
+    "rolling_sales_3d": 0.0,
+    "rolling_stock_3d": 0.01177747268229723
+  }
+}
