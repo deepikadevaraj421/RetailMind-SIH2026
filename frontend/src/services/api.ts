@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { Camera, CameraCounts, TimelineEventItem, NotificationItem, SystemStatus } from '../types';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : '/api';
 
 export const apiClient = axios.create({
   baseURL: API_BASE,
