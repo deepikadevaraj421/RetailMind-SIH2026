@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
@@ -25,21 +25,12 @@ const io = new Server(server, {
   }
 });
 
-  app.use(cors());
-  app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
-  // Serve static frontend files in production
-  if (process.env.NODE_ENV === 'production') {
-    const staticPath = path.resolve(__dirname, '../../frontend/dist');
-    app.use(express.static(staticPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(staticPath, 'index.html'));
-    });
-  }
-
-  // Attach Socket.IO to simulation engine and settings service
-  simulationEngine.setSocketServer(io);
-  SettingsService.setSocketServer(io);
+// Attach Socket.IO to simulation engine and settings service
+simulationEngine.setSocketServer(io);
+SettingsService.setSocketServer(io);
 
 
 // Socket.IO event handlers
