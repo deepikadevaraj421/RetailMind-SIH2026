@@ -1,0 +1,33 @@
+# Render Blueprint — RetailMind Single Service Deployment
+# This deploys the entire app (backend + frontend) as one web service.
+# The Node.js backend serves the React frontend's static build files.
+
+services:
+  - type: web
+    name: retailmind
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm run install:all && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVE_FRONTEND
+        value: "true"
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB_NAME
+        value: retailmind
+      - key: PORT
+        value: "10000"
+      - key: ML_SERVICE_URL
+        value: https://retailmind-ml.onrender.com
+      - key: CLIENT_URL
+        value: https://retailmind.onrender.com
+      - key: SIMULATION_ENABLED
+        value: "true"
+      - key: SIMULATION_INTERVAL_MS
+        value: "4000"
+      - key: JWT_SECRET
+        generateValue: true

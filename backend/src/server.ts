@@ -45,6 +45,23 @@ io.on('connection', (socket) => {
 // API Routes
 app.use('/api', createApiRouter(io));
 
+// ── Production: serve frontend static files ──────────────────────────────────
+// In production, the backend serves the pre-built React frontend from ../frontend/dist
+// This allows a single Render web service to host both the API and the UI.
+const frontendDistPath = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
+if (process.env.NODE_ENV === 'production' || process.env.SERVE_FRONTEND === 'true') {
+  app.use(express.static(frontendDistPath));
+
+  // SPA catch-all: any non-API route returns index.html for React Router
+  app.get('*', (req: Request, res: Response) => {
+    // Only serve index.html for non-API, non-socket paths
+    if (!req.path.startsWith('/api') && !req.path.startsWith('/socket.io')) {
+      res.sendFile(path.join(frontendDistPath, 'index.html'));
+    }
+  });
+  console.log(`[SERVER] Serving frontend from ${frontendDistPath}`);
+}
+
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
 async function startServer() {
